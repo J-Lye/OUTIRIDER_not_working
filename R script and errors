@@ -14,9 +14,18 @@ gtf_path<-"/scratch/jl5e18/RNA_SEQ/Tools/gencode.v30.annotation.gtf"
 
 ods<-filterExpression(ods, gtf_path, filterGenes=FALSE, savefpkm=TRUE)
 
+Import genomic features from the file as a GRanges object ... OK
+Prepare the 'metadata' data frame ... OK
+Make the TxDb object ... OK
+25239 genes did not pass the filter. This is 42.9% of the genes.
+Warning message:
+In .get_cds_IDX(mcols0$type, mcols0$phase) :
+  The "phase" metadata column contains non-NA values for features of type
+  stop_codon. This information was ignored.
+
+
 pdf('FPKMs2.pdf')
 plotFPKM(ods)
-1082061 sample-gene combinations are zero. This is 32.2% of the data
 dev.off()
 
 pdf('expressed_genes2.pdf')
@@ -32,14 +41,7 @@ dev.off()
 
 pdf("plot500")
 ods <-plotCountGeneSampleHeatmap(ods, colGroups=c("Disease_State", "Batch"), normalized=FALSE, nRowCluster=4)
-Import genomic features from the file as a GRanges object ... OK
-Prepare the 'metadata' data frame ... OK
-Make the TxDb object ... OK
-25239 genes did not pass the filter. This is 42.9% of the genes.
-Warning message:
-In .get_cds_IDX(mcols0$type, mcols0$phase) :
-  The "phase" metadata column contains non-NA values for features of type
-  stop_codon. This information was ignored.
+
 
 Error in estimateSizeFactorsForMatrix(fcMat) :
   every gene contains at least one zero, cannot compute log geometric means
